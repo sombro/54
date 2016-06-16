@@ -27,7 +27,9 @@ function printResult(result, y, max) {
 	}
 	showLogs ? console.log('===== Used figures: =====') : '';
 	showLogs ? console.log(count/figureSize + '/' + max/figureSize) : '';
-
+	// if (max - count <= figureSize) {
+	// 	console.log(y, count, max)
+	// }
 	if (count === max) {
 		console.log('===== Success!!! =====');
 	}
@@ -114,6 +116,8 @@ function goAll(y) { // Запуск алгоритма со всеми возм�
 	Arguments.forEach(function(arg) {
 	 	go(y, arg);
 	});
+	// Проблема в том, что все точки запуска алгоритма в одном проходе работают с одинаковым аргументом. А
+	// аргументы должны быть независимы и (?) случайны
 };
 
 function goFor(from, to) { // Запуск алгоритма со всеми возможными стратегиями на различных размерах поля
@@ -122,6 +126,26 @@ function goFor(from, to) { // Запуск алгоритма со всеми в
 	};
 };
 
-goFor(6, 10);
+// goFor(1, 6);
 // go(6, defaultArguments6);
 // goAll(6);
+
+function stupidBust(ooo) {
+	for (var k = 0; k < ooo; k++) {
+		for (var p = 0; p < ooo; p++){
+			for (var n = 1; n < ooo; n++) {
+				if (
+						((3*k + p)*(3*k + p) === 4*n) &&
+						((k + p) < n) &&
+						(k*p*n > 0) &&
+						(p <= k + 1)
+					){
+					console.log(k,p,n, Math.sqrt(4*n));
+				}
+			}
+		}
+	}
+};
+
+stupidBust(100);
+
